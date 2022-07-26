@@ -13,7 +13,10 @@ export const handler = async (
     method: "post",
     body: await _req.text(),
     headers: {
-      ...rest.headers,
+      // @ts-expect-error both mdn and deno have this
+      // https://deno.com/deploy/docs/runtime-headers#methods
+      // https://developer.mozilla.org/en-US/docs/Web/API/Headers/entries
+      ...Object.fromEntries(rest.headers.entries()),
       "X-Forwarded-For": ip,
     },
   });
