@@ -5,5 +5,5 @@ export const handler = (
   _ctx: HandlerContext
 ): Promise<Response> => {
   const { url, ...rest } = _req;
-  return fetch("https://plausible.io/api/event", { ...rest });
+  return fetch("https://plausible.io/api/event", { ...rest, method: "post" });
 };
