@@ -67,7 +67,11 @@ export const handler: Handlers<Feed | null> = {
     const json: Post[] = await response.json();
     const posts = json
       .map((post) => {
-        // return an array of slim image payloads
+        // return a trimmed down payload
+        if (!post.image_paths) {
+          console.log(`No image paths for post: ${post.id}`);
+          return;
+        }
         return post.image_paths.map((image, index) => ({
           image,
           index,
@@ -77,13 +81,13 @@ export const handler: Handlers<Feed | null> = {
       })
       .flat() // flatten the array of arrays
       .reduce((acc, post) => {
+        if (!post || !post.seed) {
+          return acc;
+        }
         // group posts by prompt + quality + index
         const key = `${post.prompt} | Quality: ${post.quality ?? 1} | Seed:  ${
           post.seed ?? "unknown"
         }`;
-        if (!post.seed) {
-          return acc;
-        }
 
         if (!acc[key]) {
           acc[key] = [];
