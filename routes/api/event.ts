@@ -6,12 +6,13 @@ export const handler = async (
 ): Promise<Response> => {
   const addr = _ctx.remoteAddr as Deno.NetAddr;
   const req = _req.clone();
-
-  return await fetch(req, {
+  console.log(Object.fromEntries(req.headers?.entries()));
+  return await fetch("https://plausible.io/api/event", {
+    method: "post",
     headers: {
-      host: "plausible.io",
-      hostname: "https://plausible.io",
+      ...Object.fromEntries(req.headers?.entries()),
       "X-Forwarded-For": addr.hostname,
     },
+    body: await _req.body(),
   });
 };
