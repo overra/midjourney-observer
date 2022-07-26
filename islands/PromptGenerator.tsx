@@ -240,7 +240,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     value="60000"
                     checked={state.stylize.includes("60000")}
                   />
-                  <label id="stylize-wild" class={tw`pl-2`} for="stylize-wild">
+                  <label class={tw`pl-2`} for="stylize-wild">
                     Wild (60000)
                   </label>
                 </div>
