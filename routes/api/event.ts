@@ -7,13 +7,11 @@ export const handler = async (
   const addr = _ctx.remoteAddr as Deno.NetAddr;
   const req = _req.clone();
 
-  return await fetch(
-    new Request(req, {
-      headers: {
-        host: "plausible.io",
-        hostname: "https://plausible.io",
-        "X-Forwarded-For": addr.hostname,
-      },
-    })
-  );
+  return await fetch(req, {
+    headers: {
+      host: "plausible.io",
+      hostname: "https://plausible.io",
+      "X-Forwarded-For": addr.hostname,
+    },
+  });
 };
