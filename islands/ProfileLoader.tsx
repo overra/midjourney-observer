@@ -31,7 +31,7 @@ export default function ProfileLoader() {
   }, [userId, url]);
 
   return (
-    <div>
+    <div class={tw`mb-12 w-full`}>
       <input
         type="text"
         name="url"
