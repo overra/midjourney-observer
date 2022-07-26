@@ -5,9 +5,10 @@ export const handler = async (
   _ctx: HandlerContext
 ): Promise<Response> => {
   const addr = _ctx.remoteAddr as Deno.NetAddr;
+  const req = _req.clone();
 
-  _req.headers.set("host", "plausible.io");
-  _req.headers.set("hostname", "https://plausible.io");
-  _req.headers.set("X-Forwarded-For", addr.hostname);
-  return await fetch(_req);
+  req.headers.set("host", "plausible.io");
+  req.headers.set("hostname", "https://plausible.io");
+  req.headers.set("X-Forwarded-For", addr.hostname);
+  return await fetch(req);
 };
