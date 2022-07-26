@@ -8,6 +8,11 @@ export default function PromptGeneratorPage() {
     <div class={tw`h-full bg-gray-900`}>
       <style>{`html, body { height: 100% }`}</style>
       <title>Prompt Generator | MidJourney Observer</title>
+      <script
+        defer
+        data-domain="midjourney.observer"
+        src="https://plausible.io/js/plausible.js"
+      ></script>
       <PromptGenerator open />;
     </div>
   );
