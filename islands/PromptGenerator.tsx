@@ -72,7 +72,9 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
 
   return (
     <details open={open}>
-      <summary class={tw`text-2xl text-green-300 p-4 cursor-pointer`}>
+      <summary
+        class={tw`text-lg sm:text-2xl text-green-300 py-2 px-4 sm:p-4 cursor-pointer`}
+      >
         Prompt Generator
       </summary>
       <form
@@ -106,7 +108,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
         </div>
         <div class={tw`flex lg:flex-row flex-col`}>
           <div
-            class={tw`flex sm:flex-col flex-col-reverse gap-4 mr-0 pr-0 lg:mr-4 lg:pr-8 lg:border-r-2 border-green-800 lg:w-1/3 sm:w-full`}
+            class={tw`flex sm:flex-col flex-col-reverse gap-4 mr-0 pr-0 lg:mr-4 lg:pr-8 lg:border-r-2 border-dotted border-green-800 lg:w-1/3 sm:w-full`}
           >
             <button
               type="submit"
@@ -116,11 +118,11 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
             </button>
 
             <fieldset>
-              <legend class={tw`text-lg text-green-200 font-bold`}>
+              <legend class={tw`text-lg text-green-200 font-bold pb-2`}>
                 Quality
               </legend>
               <div
-                class={tw`grid-cols-2 grid-rows-5 grid lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3 text-sm`}
+                class={tw`flex flex-wrap sm:grid sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3 text-sm gap-2`}
               >
                 <div>
                   <input
@@ -191,11 +193,11 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
             </fieldset>
 
             <fieldset>
-              <legend class={tw`text-lg text-green-200 font-bold`}>
+              <legend class={tw`text-lg text-green-200 font-bold pb-2`}>
                 Stylize
               </legend>
               <div
-                class={tw`grid-cols-2 grid-rows-5 grid lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3 text-sm`}
+                class={tw`flex flex-wrap sm:grid  sm:grid-cols-4 md:grid-cols-5  lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3 text-sm gap-2`}
               >
                 <div>
                   <input
@@ -317,18 +319,21 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                 Random
               </button>
             </div>
-            <div class={tw`order-first sm:order-last`}>
-              <div class={tw`w-full text-xl`}>
-                Commands: {totalCommands} ({totalCommands} x 4 samples)
+            <div
+              class={tw`order-first sm:order-last rounded-lg shadow-md border-green-800 border-dotted border-2 bg-green-900 p-4`}
+            >
+              <div class={tw`w-full text-lg leading-relaxed text-green-200`}>
+                On metered MidJourney usage, this will cost approximately{" "}
+                <strong>
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(totalAmount)}
+                </strong>{" "}
+                for <strong>{ms(totalTime * 60000, { long: true })}</strong> of
+                GPU time
               </div>
-              <div class={tw`w-full text-2xl text-green-200`}>
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(totalAmount)}{" "}
-                for {ms(totalTime * 60000, { long: true })} of GPU time
-              </div>
-              <span class={tw`text-sm text-green-500`}>
+              <span class={tw`text-xs text-green-300`}>
                 Based on Incremental Billing ($4 for 60 GPU minutes)
               </span>
             </div>

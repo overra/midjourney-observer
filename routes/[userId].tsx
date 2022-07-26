@@ -151,7 +151,7 @@ export default function Feed(props: PageProps<Feed | null>) {
         {groups.map(([prompt, samples]) => (
           <div class={tw`flex flex-col border-t-teal-300`}>
             <h2
-              class={tw`text-xl px-8 py-4 text-green-400`}
+              class={tw`text-base sm:text-xl px-8 py-4 text-green-400`}
               style={{
                 backgroundImage:
                   "linear-gradient(to  left, rgba(52, 211, 153,0), rgba(52, 211, 153,1) 300%)",
@@ -164,15 +164,13 @@ export default function Feed(props: PageProps<Feed | null>) {
             >
               {samples.map((sample, index) => (
                 <div
-                  class={tw`p-2 flex flex-col items-center `}
+                  class={tw`p-2 flex flex-col `}
                   style={{ flexBasis: "max(320px, calc(25% - 32px))" }}
                 >
-                  <h3 class={tw`text-purple-200 text-lg font-bold`}>
+                  <h3 class={tw`text-purple-500 text-xs uppercase font-bold`}>
                     {sampleNames[index]}
                   </h3>
-                  <div
-                    class={tw`flex flex-row flex-wrap justify-center pt-4 gap-4`}
-                  >
+                  <div class={tw`grid grid-cols-4 justify-center pt-4 gap-4`}>
                     {sample
                       .sort((a, b) =>
                         parseInt(a.stylize) > parseInt(b.stylize)
