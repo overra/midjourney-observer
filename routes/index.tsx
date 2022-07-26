@@ -59,7 +59,7 @@ export default function Home() {
         class={tw`w-full h-full bg-cover flex flex-row justify-center items-center bg-purple-900`}
       >
         <div class={tw`flex lg:flex-row md:flex-col gap-8`}>
-          <div class={tw`rounded-lg shadow-lg overflow-hidden md:hidden`}>
+          <div class={tw`rounded-lg shadow-lg overflow-hidden lg:block hidden`}>
             <img src="/screenshot.webp" class={tw`w-64`} />
           </div>
           <div class={tw`bg-purple-800 p-8 max-w-prose rounded-lg shadow-lg`}>

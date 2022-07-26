@@ -30,6 +30,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
     });
   }
 
+  const totalCommands = state.quality.length * state.stylize.length;
   const totalTime = state.quality.reduce(
     (total, quality) =>
       total + parseFloat(quality as string) * state.stylize.length,
@@ -49,6 +50,9 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
       }
     }
   } else {
+    output.push(["☝️ Let your imagination flow 🧘"]);
+  }
+
   function handleChange(event: Event) {
     const input = event.target as HTMLInputElement;
     const name = input.name as keyof typeof state;
@@ -87,15 +91,15 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
             name="prompt"
             type="text"
             value={state.prompt}
-            class={tw`p-2 text-gray-800 bg-white bg-blend-overlay rounded-lg shadow-2xl w-full`}
+            class={tw`p-2 text-gray-800 bg-white bg-blend-overlay rounded-lg shadow-2xl flex-grow`}
             placeholder="e.g. a cat made of cheese"
             onChange={handleChange}
           />
           <button
             type="submit"
-            class={tw`ml-4 text-green-200 border-green-200 border-2 px-4 py-2 rounded-md transition-colors duration-200 bg-purple-900 hover:bg-purple-800`}
+            class={tw`ml-4  text-green-200 border-green-200 border-2 px-4 py-2 rounded-md transition-colors duration-200 bg-purple-900 hover:bg-purple-800`}
           >
-            Generate
+            Generate Commands
           </button>
         </div>
         <div class={tw`flex lg:flex-row md:flex-col sm:flex-col`}>
@@ -301,24 +305,29 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
               </button>
             </div>
             <div>
-              <div class={tw`w-full text-3xl`}>
+              <div class={tw`w-full text-xl`}>
+                Commands: {totalCommands} ({totalCommands} x 4 samples)
+              </div>
+              <div class={tw`w-full text-2xl text-green-200`}>
                 {new Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "USD",
                 }).format(totalAmount)}{" "}
-                for {ms(totalTime * 60000, { long: true })}
+                for {ms(totalTime * 60000, { long: true })} of GPU time
               </div>
-              <span class={tw`text-sm`}>
-                Incremental Billing ($4 for 60 GPU minutes)
+              <span class={tw`text-sm text-green-500`}>
+                Based on Incremental Billing ($4 for 60 GPU minutes)
               </span>
             </div>
           </div>
           <div class={tw`flex flex-col gap-4`}>
             {batch(output, 10).map((item) => (
-              <div
-                class={tw`rounded-md bg-green-800 w-full p-4 whitespace-pre`}
-              >
-                {item.join("")}
+              <div>
+                <div
+                  class={tw`rounded-md bg-green-800 w-full p-4 whitespace-pre`}
+                >
+                  {item.join("")}
+                </div>
               </div>
             ))}
           </div>
