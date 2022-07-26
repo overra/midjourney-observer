@@ -4,6 +4,7 @@
 
 import * as $0 from "./routes/[userId].tsx";
 import * as $1 from "./routes/index.tsx";
+import * as $2 from "./routes/prompt.tsx";
 import * as $$0 from "./islands/ProfileLoader.tsx";
 import * as $$1 from "./islands/PromptGenerator.tsx";
 
@@ -11,6 +12,7 @@ const manifest = {
   routes: {
     "./routes/[userId].tsx": $0,
     "./routes/index.tsx": $1,
+    "./routes/prompt.tsx": $2,
   },
   islands: {
     "./islands/ProfileLoader.tsx": $$0,
