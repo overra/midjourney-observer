@@ -10,7 +10,7 @@ export default function Home() {
         id="main"
         class={tw`w-full h-full flex bg-cover justify-center items-center`}
         style={{
-          backgroundImage: ` linear-gradient(to bottom, rgba(76, 29, 149,0), rgba(76, 29, 149,1)), url(https://media.discordapp.net/attachments/986130712484782091/1001325172118274128/33611c38-9570-4b0b-bdf6-0096f581c9c6_progress_image_77.webp)`,
+          backgroundImage: ` linear-gradient(to bottom, rgba(255, 255, 255,0), rgba(255, 255, 255,1)), url(https://media.discordapp.net/attachments/986130712484782091/1001325172118274128/33611c38-9570-4b0b-bdf6-0096f581c9c6_progress_image_77.webp)`,
         }}
       >
         <div
@@ -37,26 +37,34 @@ export default function Home() {
             MidJourney Observer
           </h1>
           <p class={tw`my-6 text-white opacity-90`}>
-            Paste your MidJourney Profile URL here to see the breakdown of your
-            prompts.
+            Paste your <strong>MidJourney Profile URL</strong> here to see the
+            breakdown of your prompts.
           </p>
           <ProfileLoader />
           <div class={tw`flex flex-row items-center gap-4`}>
             <p class={tw`text-purple-50`}>
-              You'll need generated sets of seeded images.
+              Group sample images from generated sets of seeded images!
             </p>
             <a
               href="#info"
               class={tw`text-green-200 border-green-200 border-2 px-4 py-2 rounded-md transition-colors duration-200 bg-purple-900 hover:bg-purple-800`}
             >
-              Learn more
+              Find out how
             </a>
           </div>
         </div>
       </div>
       <div
+        class={tw`h-1/2 bg-white p-8 flex justify-center items-center text-gray-400`}
+      >
+        ☕ more ideas are brewing...
+      </div>
+      <div
         id="info"
-        class={tw`w-full h-full bg-cover flex flex-row justify-center items-center bg-purple-900`}
+        class={tw`w-full h-full bg-cover flex flex-row justify-center items-center  bg-blend-luminosity -mb-16`}
+        style={{
+          backgroundImage: `linear-gradient(to top, rgba(255, 255, 255,0), rgba(255, 255, 255,1)), url(/lighthouse.webp)`,
+        }}
       >
         <div class={tw`flex lg:flex-row md:flex-col gap-8`}>
           <div class={tw`rounded-lg shadow-lg overflow-hidden lg:block hidden`}>
@@ -72,6 +80,14 @@ export default function Home() {
               <Code>--quality</Code> or <Code>--stylize</Code> values, you'll
               get a set of images that you can use to compare how your prompts
               look.
+            </p>
+
+            <p class={tw`pb-8 text-white font-bold`}>
+              Need help generating prompts? Check out the{" "}
+              <a href="/prompt" class={tw`text-green-200`}>
+                Prompt Generator
+              </a>
+              !
             </p>
 
             <h2 class={tw`text-2xl text-purple-200 pb-4`}>
@@ -100,6 +116,18 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </div>
+      <div
+        class={tw`flex justify-center items-center text-sm bg-purple-900 h-16 text-purple-50`}
+      >
+        Made with 💜 by
+        <a
+          href="https://twitter.com/overra"
+          target="_blank"
+          class={tw`text-green-200 inline-block ml-2 px-2 py-1 bg-purple-800`}
+        >
+          @overra
+        </a>
       </div>
     </div>
   );
