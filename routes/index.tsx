@@ -21,7 +21,8 @@ export default function Home() {
           }}
         >
           <head>
-            <style>{`html, body { height: 100% }`}</style>
+            <style>{`html, body { height: 100%; background-color: rgb(76, 29, 149)
+; }`}</style>
             <title>MidJourney Observer</title>
             <meta
               name="description"
