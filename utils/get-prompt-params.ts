@@ -1,7 +1,7 @@
 export function getPromptParams(command: string) {
   return Array.from(
     command.matchAll(
-      /\-\-seed\s(?<seed>\d+)|\-\-quality\s(?<quality>[\d\.]+)|\-\-stylize\s(?<stylize>\d+)/g
+      /\-\-s\s(?<s>\d+)|\-\-seed\s(?<seed>\d+)|\-\-q\s(?<q>[\d\.]+)|\-\-quality\s(?<quality>[\d\.]+)|\-\-stylize\s(?<stylize>\d+)/g
     )
   ).reduce<Record<string, string>>((groups, group) => {
     if (!group.groups) {

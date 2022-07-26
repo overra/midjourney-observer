@@ -36,7 +36,13 @@ type FeedImage = {
   stylize?: number;
 };
 
-type Params = { quality: string; stylize: string; seed: string };
+type Params = {
+  quality: string;
+  stylize: string;
+  seed: string;
+  q: string;
+  s: string;
+};
 
 export const handler: Handlers<Feed | null> = {
   async GET(_, ctx) {
@@ -72,11 +78,14 @@ export const handler: Handlers<Feed | null> = {
           console.log(`No image paths for post: ${post.id}`);
           return;
         }
+        const params = getPromptParams(post.full_command) as Params;
         return post.image_paths.map((image, index) => ({
           image,
           index,
           prompt: post.event.textPrompt.join(" + "),
-          ...(getPromptParams(post.full_command) as Params),
+          seed: params.seed,
+          quality: params.quality || params.q || "1",
+          stylize: params.stylize || params.s || "2500",
         }));
       })
       .flat() // flatten the array of arrays
