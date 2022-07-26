@@ -168,7 +168,13 @@ export default function Feed(props: PageProps<Feed | null>) {
                         <div
                           class={tw`flex flex-col justify-between items-center`}
                         >
-                          <img class={tw`w-16 shadow-lg`} src={image.image} />
+                          <img
+                            loading="lazy"
+                            class={tw`w-16 shadow-lg`}
+                            src={image.image}
+                            width={64}
+                            height={64}
+                          />
                           <div class={tw`text-xs text-green-200 pt-2`}>
                             {image.stylize}
                           </div>
