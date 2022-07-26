@@ -50,7 +50,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
       }
     }
   } else {
-    output.push(["☝️ Let your imagination flow 🧘"]);
+    output.push(["☝️ Let your imagination flow..."]);
   }
 
   function handleChange(event: Event) {
@@ -80,9 +80,11 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
         action="/"
         target="_blank"
         onSubmit={handleSubmit}
-        class={tw`p-8 bg-green-900 text-green-100 flex flex-col `}
+        class={tw`p-4 sm:p-8 bg-green-900 text-green-100 flex flex-col `}
       >
-        <div class={tw`flex flex-row items-center pb-4`}>
+        <div
+          class={tw`flex sm:flex-row flex-col sm:gap-0 gap-4 sm:items-center pb-4`}
+        >
           <label for="prompt" class={tw`pr-4 text-lg text-green-200 font-bold`}>
             Prompt
           </label>
@@ -97,21 +99,30 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
           />
           <button
             type="submit"
-            class={tw`ml-4  text-green-200 border-green-200 border-2 px-4 py-2 rounded-md transition-colors duration-200 bg-purple-900 hover:bg-purple-800`}
+            class={tw`ml-4 hidden sm:block  text-green-200 border-green-200 border-2 px-4 py-2 rounded-md transition-colors duration-200 bg-purple-900 hover:bg-purple-800`}
           >
             Generate Commands
           </button>
         </div>
-        <div class={tw`flex lg:flex-row md:flex-col sm:flex-col`}>
+        <div class={tw`flex lg:flex-row flex-col`}>
           <div
-            class={tw`flex flex-col gap-4 mr-4 pr-8 lg:border-r-2 border-green-800 lg:w-1/3 sm:w-full`}
+            class={tw`flex sm:flex-col flex-col-reverse gap-4 mr-0 pr-0 lg:mr-4 lg:pr-8 lg:border-r-2 border-green-800 lg:w-1/3 sm:w-full`}
           >
+            <button
+              type="submit"
+              class={tw`block sm:hidden  text-green-200 border-green-200 border-2 px-4 py-2 rounded-md transition-colors duration-200 bg-purple-900 hover:bg-purple-800`}
+            >
+              Generate Commands
+            </button>
+
             <fieldset>
               <legend class={tw`text-lg text-green-200 font-bold`}>
                 Quality
               </legend>
-              <div class={tw`text-sm flex flex-row flex-wrap `}>
-                <div class={tw`w-1/3`}>
+              <div
+                class={tw`grid-cols-2 grid-rows-5 grid lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3 text-sm`}
+              >
+                <div>
                   <input
                     id="quality-low"
                     name="quality"
@@ -121,10 +132,10 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="quality-low">
-                    Low (0.25x)
+                    Low 0.25
                   </label>
                 </div>
-                <div class={tw`w-1/3`}>
+                <div>
                   <input
                     id="quality-medium"
                     name="quality"
@@ -134,10 +145,10 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="quality-medium">
-                    Medium (0.5x)
+                    Med 0.5
                   </label>
                 </div>
-                <div class={tw`w-1/3`}>
+                <div>
                   <input
                     id="quality-normal"
                     name="quality"
@@ -147,10 +158,10 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="quality-normal">
-                    Normal (1x)
+                    Base 1
                   </label>
                 </div>
-                <div class={tw`w-1/3`}>
+                <div>
                   <input
                     id="quality-high"
                     name="quality"
@@ -160,10 +171,10 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="quality-high">
-                    High (2x) <span class={tw`text-yellow-300`}>$$</span>
+                    More 2 <span class={tw`text-yellow-300`}>$$</span>
                   </label>
                 </div>
-                <div class={tw`w-1/3`}>
+                <div>
                   <input
                     id="quality-ultra"
                     name="quality"
@@ -173,7 +184,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="quality-ultra">
-                    Ultra (5x) <span class={tw`text-yellow-300`}>$$$$$</span>
+                    Exp 5 <span class={tw`text-yellow-300`}>$$$$$</span>
                   </label>
                 </div>
               </div>
@@ -183,7 +194,9 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
               <legend class={tw`text-lg text-green-200 font-bold`}>
                 Stylize
               </legend>
-              <div class={tw`grid-cols-3 grid-rows-3 grid text-sm`}>
+              <div
+                class={tw`grid-cols-2 grid-rows-5 grid lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3 text-sm`}
+              >
                 <div>
                   <input
                     id="stylize-none"
@@ -194,7 +207,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-none">
-                    None (625)
+                    None 625
                   </label>
                 </div>
                 <div>
@@ -207,7 +220,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-low">
-                    Low (1250)
+                    Low 1250
                   </label>
                 </div>
                 <div>
@@ -220,7 +233,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-medium">
-                    Medium (2500)
+                    Medium 2500
                   </label>
                 </div>
                 <div>
@@ -233,7 +246,20 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-high">
-                    High (5000)
+                    High 5000
+                  </label>
+                </div>
+                <div>
+                  <input
+                    id="stylize-very-high"
+                    name="stylize"
+                    type="checkbox"
+                    value="10000"
+                    checked={state.stylize.includes("10000")}
+                    onChange={handleChange}
+                  />
+                  <label class={tw`pl-2`} for="stylize-very-high">
+                    Higher 10000
                   </label>
                 </div>
                 <div>
@@ -241,25 +267,12 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     id="stylize-ultra"
                     name="stylize"
                     type="checkbox"
-                    value="10000"
-                    checked={state.stylize.includes("10000")}
-                    onChange={handleChange}
-                  />
-                  <label class={tw`pl-2`} for="stylize-ultra">
-                    Ultra (10000)
-                  </label>
-                </div>
-                <div>
-                  <input
-                    id="stylize-best"
-                    name="stylize"
-                    type="checkbox"
                     value="20000"
                     checked={state.stylize.includes("20000")}
                     onChange={handleChange}
                   />
-                  <label class={tw`pl-2`} for="stylize-best">
-                    "Best" (20000)
+                  <label class={tw`pl-2`} for="stylize-ultra">
+                    Ultra 20000
                   </label>
                 </div>
                 <div>
@@ -272,7 +285,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-wild">
-                    Wild (60000)
+                    Wild 60000
                   </label>
                 </div>
               </div>
@@ -304,7 +317,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                 Random
               </button>
             </div>
-            <div>
+            <div class={tw`order-first sm:order-last`}>
               <div class={tw`w-full text-xl`}>
                 Commands: {totalCommands} ({totalCommands} x 4 samples)
               </div>
@@ -320,7 +333,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
               </span>
             </div>
           </div>
-          <div class={tw`flex flex-col gap-4`}>
+          <div class={tw`flex flex-col gap-4 lg:pt-0 pt-4`}>
             {batch(output, 10).map((item) => (
               <div>
                 <div
