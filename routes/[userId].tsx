@@ -113,6 +113,7 @@ export default function Feed(props: PageProps<Feed | null>) {
     );
   }
   const sampleNames = ["Top Left", "Top Right", "Bottom Left", "Bottom Right"];
+  const groups = Object.entries(props.data.posts);
   return (
     <div class={tw`bg-gray-900`}>
       <title>{props.data.username}'s prompt breakdown</title>
@@ -131,7 +132,8 @@ export default function Feed(props: PageProps<Feed | null>) {
         {props.data.username}'s prompt breakdown
       </h1>
       <div class={tw`flex flex-col`}>
-        {Object.entries(props.data.posts).map(([prompt, samples]) => (
+        {groups.length === 0 ? <div>No seeded prompts found.</div> : null}
+        {groups.map(([prompt, samples]) => (
           <div class={tw`flex flex-col border-t-teal-300`}>
             <h2
               class={tw`text-xl px-8 py-4 text-green-400`}
