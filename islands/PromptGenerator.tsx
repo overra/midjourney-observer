@@ -49,7 +49,21 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
       }
     }
   } else {
-    output.push(["☝️ Generate a list of prompt commmands"]);
+  function handleChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const name = input.name as keyof typeof state;
+    const value = input.value;
+    const currentState = state[name];
+    if (Array.isArray(currentState)) {
+      setState((state) => ({
+        ...state,
+        [name]: currentState.includes(value)
+          ? currentState.filter((v) => v !== value)
+          : [...currentState, value],
+      }));
+    } else {
+      setState((state) => ({ ...state, [name]: value }));
+    }
   }
 
   return (
@@ -75,6 +89,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
             value={state.prompt}
             class={tw`p-2 text-gray-800 bg-white bg-blend-overlay rounded-lg shadow-2xl w-full`}
             placeholder="e.g. a cat made of cheese"
+            onChange={handleChange}
           />
           <button
             type="submit"
@@ -99,6 +114,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="0.25"
                     checked={state.quality.includes("0.25")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="quality-low">
                     Low (0.25x)
@@ -111,6 +127,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="0.5"
                     checked={state.quality.includes("0.5")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="quality-medium">
                     Medium (0.5x)
@@ -123,6 +140,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="1"
                     checked={state.quality.includes("1")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="quality-normal">
                     Normal (1x)
@@ -135,6 +153,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="2"
                     checked={state.quality.includes("2")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="quality-high">
                     High (2x) <span class={tw`text-yellow-300`}>$$</span>
@@ -147,6 +166,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="5"
                     checked={state.quality.includes("5")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="quality-ultra">
                     Ultra (5x) <span class={tw`text-yellow-300`}>$$$$$</span>
@@ -167,6 +187,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="625"
                     checked={state.stylize.includes("625")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-none">
                     None (625)
@@ -179,6 +200,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="1250"
                     checked={state.stylize.includes("1250")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-low">
                     Low (1250)
@@ -191,6 +213,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="2500"
                     checked={state.stylize.includes("2500")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-medium">
                     Medium (2500)
@@ -203,6 +226,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="5000"
                     checked={state.stylize.includes("5000")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-high">
                     High (5000)
@@ -215,6 +239,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="10000"
                     checked={state.stylize.includes("10000")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-ultra">
                     Ultra (10000)
@@ -227,6 +252,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="20000"
                     checked={state.stylize.includes("20000")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-best">
                     "Best" (20000)
@@ -239,6 +265,7 @@ export default function PromptGenerator({ open = false }: { open?: boolean }) {
                     type="checkbox"
                     value="60000"
                     checked={state.stylize.includes("60000")}
+                    onChange={handleChange}
                   />
                   <label class={tw`pl-2`} for="stylize-wild">
                     Wild (60000)
