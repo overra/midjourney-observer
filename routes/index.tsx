@@ -21,6 +21,12 @@ export default function Home() {
           }}
         >
           <style>{`html, body { height: 100% }`}</style>
+          <title>Midjourney Observer</title>
+          <script
+            defer
+            data-domain="midjourney-observer.deno.dev"
+            src="https://plausible.io/js/plausible.js"
+          ></script>
           <h1 class={tw`text-6xl text-white mix-blend-overlay`}>
             Midjourney Observer
           </h1>

@@ -115,6 +115,12 @@ export default function Feed(props: PageProps<Feed | null>) {
   const sampleNames = ["Top Left", "Top Right", "Bottom Left", "Bottom Right"];
   return (
     <div class={tw`bg-gray-900`}>
+      <title>{props.data.username}'s prompt breakdown</title>
+      <script
+        defer
+        data-domain="midjourney-observer.deno.dev"
+        src="https://plausible.io/js/plausible.js"
+      ></script>
       <h1
         class={tw`p-8 text-2xl text-purple-400`}
         style={{
