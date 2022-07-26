@@ -11,7 +11,7 @@ export default function PromptGeneratorPage() {
       <script
         defer
         data-domain="midjourney.observer"
-        src="https://plausible.io/js/plausible.js"
+        src="/js/script.js"
       ></script>
       <PromptGenerator open />;
     </div>

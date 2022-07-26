@@ -31,7 +31,7 @@ export default function Home() {
             <script
               defer
               data-domain="midjourney.observer"
-              src="https://plausible.io/js/plausible.js"
+              src="/js/script.js"
             ></script>
           </head>
           <h1 class={tw`text-6xl text-white mix-blend-overlay`}>

@@ -127,7 +127,7 @@ export default function Feed(props: PageProps<Feed | null>) {
         <script
           defer
           data-domain="midjourney.observer"
-          src="https://plausible.io/js/plausible.js"
+          src="/js/script.js"
         ></script>
       </head>
       <h1

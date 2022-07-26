@@ -3,16 +3,20 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $0 from "./routes/[userId].tsx";
-import * as $1 from "./routes/index.tsx";
-import * as $2 from "./routes/prompt.tsx";
+import * as $1 from "./routes/api/event.ts";
+import * as $2 from "./routes/index.tsx";
+import * as $3 from "./routes/js/script.js.ts";
+import * as $4 from "./routes/prompt.tsx";
 import * as $$0 from "./islands/ProfileLoader.tsx";
 import * as $$1 from "./islands/PromptGenerator.tsx";
 
 const manifest = {
   routes: {
     "./routes/[userId].tsx": $0,
-    "./routes/index.tsx": $1,
-    "./routes/prompt.tsx": $2,
+    "./routes/api/event.ts": $1,
+    "./routes/index.tsx": $2,
+    "./routes/js/script.js.ts": $3,
+    "./routes/prompt.tsx": $4,
   },
   islands: {
     "./islands/ProfileLoader.tsx": $$0,
