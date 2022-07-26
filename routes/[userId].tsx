@@ -1,11 +1,12 @@
 /** @jsx h */
-import { h } from "preact";
+import { h, Fragment } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import type { Post } from "../utils/types.ts";
 import { getPromptParams } from "../utils/get-prompt-params.ts";
 import { tw } from "@twind";
 import "https://deno.land/x/dotenv@v3.2.0/load.ts";
 import PromptGenerator from "../islands/PromptGenerator.tsx";
+import { Head } from "$fresh/src/runtime/head.ts";
 
 type Feed = {
   username: string;
@@ -116,8 +117,8 @@ export default function Feed(props: PageProps<Feed | null>) {
   const sampleNames = ["Top Left", "Top Right", "Bottom Left", "Bottom Right"];
   const groups = Object.entries(props.data.posts);
   return (
-    <div class={tw`bg-gray-900 min-h-full`}>
-      <head>
+    <Fragment>
+      <Head>
         <style>{`html, body { height: 100% }`}</style>
         <title>{props.data.username}'s sets | MidJourney Observer</title>
         <meta
@@ -129,80 +130,85 @@ export default function Feed(props: PageProps<Feed | null>) {
           data-domain="midjourney.observer"
           src="/js/script.js"
         ></script>
-      </head>
-      <h1
-        class={tw`p-8 text-2xl text-purple-400`}
-        style={{
-          backgroundImage:
-            "linear-gradient(to bottom left, rgba(76, 29, 149,0), rgba(76, 29, 149,1) 200%)",
-        }}
-      >
-        {props.data.username}'s prompt breakdown
-      </h1>
-      <div class={tw`flex flex-col`}>
-        <PromptGenerator open={groups.length === 0} />
-        {groups.length === 0 ? (
-          <div class={tw`text-center p-8 text-3xl text-blue-100`}>
-            Bummer, I couldn't find any recently generated images with a{" "}
-            <code class={tw`font-mono bg-purple-900 text-2xl p-1`}>--seed</code>
-            . ☝️ Try generating one!{" "}
-          </div>
-        ) : null}
-        {groups.map(([prompt, samples]) => (
-          <div class={tw`flex flex-col border-t-teal-300`}>
-            <h2
-              class={tw`text-base sm:text-xl px-8 py-4 text-green-400`}
-              style={{
-                backgroundImage:
-                  "linear-gradient(to  left, rgba(52, 211, 153,0), rgba(52, 211, 153,1) 300%)",
-              }}
-            >
-              {prompt}
-            </h2>
-            <div
-              class={tw`flex flex-row flex-wrap justify-evenly text-purple-300 bg-black pt-4 pb-16`}
-            >
-              {samples.map((sample, index) => (
-                <div
-                  class={tw`p-2 flex flex-col `}
-                  style={{ flexBasis: "max(320px, calc(25% - 32px))" }}
-                >
-                  <h3 class={tw`text-purple-500 text-xs uppercase font-bold`}>
-                    {sampleNames[index]}
-                  </h3>
-                  <div class={tw`grid grid-cols-4 justify-center pt-4 gap-4`}>
-                    {sample
-                      .sort((a, b) =>
-                        parseInt(a.stylize) > parseInt(b.stylize)
-                          ? 1
-                          : parseInt(a.stylize) < parseInt(b.stylize)
-                          ? -1
-                          : 0
-                      )
-                      .map((image) => (
-                        <div
-                          class={tw`flex flex-col justify-between items-center`}
-                        >
-                          <img
-                            loading="lazy"
-                            class={tw`w-16 shadow-lg`}
-                            src={image.image}
-                            width={64}
-                            height={64}
-                            alt={prompt}
-                          />
-                          <div class={tw`text-xs text-green-200 pt-2`}>
-                            {image.stylize}
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              ))}
+      </Head>
+
+      <div class={tw`bg-gray-900 min-h-full`}>
+        <h1
+          class={tw`p-8 text-2xl text-purple-400`}
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom left, rgba(76, 29, 149,0), rgba(76, 29, 149,1) 200%)",
+          }}
+        >
+          {props.data.username}'s prompt breakdown
+        </h1>
+        <div class={tw`flex flex-col`}>
+          <PromptGenerator open={groups.length === 0} />
+          {groups.length === 0 ? (
+            <div class={tw`text-center p-8 text-3xl text-blue-100`}>
+              Bummer, I couldn't find any recently generated images with a{" "}
+              <code class={tw`font-mono bg-purple-900 text-2xl p-1`}>
+                --seed
+              </code>
+              . ☝️ Try generating one!{" "}
             </div>
-          </div>
-        ))}
+          ) : null}
+          {groups.map(([prompt, samples]) => (
+            <div class={tw`flex flex-col border-t-teal-300`}>
+              <h2
+                class={tw`text-base sm:text-xl px-8 py-4 text-green-400`}
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to  left, rgba(52, 211, 153,0), rgba(52, 211, 153,1) 300%)",
+                }}
+              >
+                {prompt}
+              </h2>
+              <div
+                class={tw`flex flex-row flex-wrap justify-evenly text-purple-300 bg-black pt-4 pb-16`}
+              >
+                {samples.map((sample, index) => (
+                  <div
+                    class={tw`p-2 flex flex-col `}
+                    style={{ flexBasis: "max(320px, calc(25% - 32px))" }}
+                  >
+                    <h3 class={tw`text-purple-500 text-xs uppercase font-bold`}>
+                      {sampleNames[index]}
+                    </h3>
+                    <div class={tw`grid grid-cols-4 justify-center pt-4 gap-4`}>
+                      {sample
+                        .sort((a, b) =>
+                          parseInt(a.stylize) > parseInt(b.stylize)
+                            ? 1
+                            : parseInt(a.stylize) < parseInt(b.stylize)
+                            ? -1
+                            : 0
+                        )
+                        .map((image) => (
+                          <div
+                            class={tw`flex flex-col justify-between items-center`}
+                          >
+                            <img
+                              loading="lazy"
+                              class={tw`w-16 shadow-lg`}
+                              src={image.image}
+                              width={64}
+                              height={64}
+                              alt={prompt}
+                            />
+                            <div class={tw`text-xs text-green-200 pt-2`}>
+                              {image.stylize}
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
