@@ -126,15 +126,23 @@ export default function Feed(props: PageProps<Feed | null>) {
       </h1>
       <div class={tw`flex flex-col`}>
         {Object.entries(props.data.posts).map(([prompt, samples]) => (
-          <div class={tw`flex flex-col pt-4`}>
-            <h2 class={tw`text-xl p-8 pt-4 pb-2 text-green-400`}>{prompt}</h2>
+          <div class={tw`flex flex-col border-t-teal-300`}>
+            <h2
+              class={tw`text-xl px-8 py-4 text-green-400`}
+              style={{
+                backgroundImage:
+                  "linear-gradient(to  left, rgba(52, 211, 153,0), rgba(52, 211, 153,1) 300%)",
+              }}
+            >
+              {prompt}
+            </h2>
             <div
-              class={tw`flex flex-row flex-wrap justify-evenly text-purple-300 pt-4`}
+              class={tw`flex flex-row flex-wrap justify-evenly text-purple-300 bg-black pt-4 pb-16`}
             >
               {samples.map((sample, index) => (
                 <div
-                  class={tw`p-4 bg-black flex flex-col items-center `}
-                  style={{ flexBasis: "max(384px, calc(25% - 32px))" }}
+                  class={tw`p-2 flex flex-col items-center `}
+                  style={{ flexBasis: "max(320px, calc(25% - 32px))" }}
                 >
                   <h3 class={tw`text-purple-200 text-lg font-bold`}>
                     {sampleNames[index]}
