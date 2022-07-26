@@ -24,7 +24,7 @@ export default function Home() {
           <title>MidJourney Observer</title>
           <script
             defer
-            data-domain="midjourney-observer.deno.dev"
+            data-domain="midjourney.observer"
             src="https://plausible.io/js/plausible.js"
           ></script>
           <h1 class={tw`text-6xl text-white mix-blend-overlay`}>
@@ -99,7 +99,7 @@ export default function Home() {
   );
 }
 
-function Code({ children }: { children: string }) {
+export function Code({ children }: { children: string }) {
   return (
     <code class={tw`font-mono bg-purple-900 text-xs p-1`}>{children}</code>
   );

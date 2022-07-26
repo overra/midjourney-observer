@@ -5,6 +5,7 @@ import type { Post } from "../utils/types.ts";
 import { getPromptParams } from "../utils/get-prompt-params.ts";
 import { tw } from "@twind";
 import "https://deno.land/x/dotenv@v3.2.0/load.ts";
+import PromptGenerator from "../islands/PromptGenerator.tsx";
 
 type Feed = {
   username: string;
@@ -115,11 +116,13 @@ export default function Feed(props: PageProps<Feed | null>) {
   const sampleNames = ["Top Left", "Top Right", "Bottom Left", "Bottom Right"];
   const groups = Object.entries(props.data.posts);
   return (
-    <div class={tw`bg-gray-900`}>
+    <div class={tw`bg-gray-900 min-h-full`}>
+      <style>{`html, body { height: 100% }`}</style>
+
       <title>{props.data.username}'s prompt breakdown</title>
       <script
         defer
-        data-domain="midjourney-observer.deno.dev"
+        data-domain="midjourney.observer"
         src="https://plausible.io/js/plausible.js"
       ></script>
       <h1
@@ -132,7 +135,14 @@ export default function Feed(props: PageProps<Feed | null>) {
         {props.data.username}'s prompt breakdown
       </h1>
       <div class={tw`flex flex-col`}>
-        {groups.length === 0 ? <div>No seeded prompts found.</div> : null}
+        <PromptGenerator open={groups.length === 0} />
+        {groups.length === 0 ? (
+          <div class={tw`text-center p-8 text-3xl text-blue-100`}>
+            Bummer, I couldn't find any recently generated images with a{" "}
+            <code class={tw`font-mono bg-purple-900 text-2xl p-1`}>--seed</code>
+            . ☝️ Try generating one!{" "}
+          </div>
+        ) : null}
         {groups.map(([prompt, samples]) => (
           <div class={tw`flex flex-col border-t-teal-300`}>
             <h2
