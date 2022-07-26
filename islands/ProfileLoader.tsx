@@ -27,6 +27,7 @@ export default function ProfileLoader() {
   useLayoutEffect(() => {
     if (userId) {
       window.location.href = `/${userId}`;
+      setState((state) => ({ ...state, url: "" }));
     }
   }, [userId, url]);
 
@@ -36,7 +37,11 @@ export default function ProfileLoader() {
         type="text"
         name="url"
         id="profile-url"
-        placeholder="e.g. https://www.midjourney.com/app/users/128025340508504065/"
+        placeholder={
+          userId
+            ? "Loading..."
+            : "e.g. https://www.midjourney.com/app/users/128025340508504065/"
+        }
         onKeyUp={handleChange}
         onFocusCapture={() => {
           setTimeout(() => {
